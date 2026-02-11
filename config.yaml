@@ -1,0 +1,97 @@
+# GitHub Activity Generator System Configuration
+
+github:
+  username: ""  # Will be loaded from env var
+  token: "${GITHUB_TOKEN}"
+  repository_strategy: "separate"  # Options: "separate", "monorepo"
+  default_visibility: "public"  # Options: "public", "private"
+  repository_prefix: "auto-"  # Prefix for auto-generated repos (e.g., "auto-ml-classifier")
+  use_topics: true  # Add topic tags to repositories
+  create_issues: false  # Create issues for future enhancements
+
+ai:
+  provider: "ollama"  # Options: "openai", "ollama"
+  model: "llama3.2"  # For OpenAI: "gpt-4", "gpt-3.5-turbo" | For Ollama: "llama3", "codellama", "llama3.2"
+  api_key: "${OPENAI_API_KEY}"
+  temperature: 0.7  # Creativity level (0.0-1.0)
+  max_tokens: 3000  # Maximum tokens per generation
+  timeout: 60  # API timeout in seconds
+
+skills:
+  focus_areas:
+    ai_ml: 35  # Percentage weight
+    full_stack: 30
+    system_design: 20
+    security_blockchain: 15
+  
+  progression:
+    start_difficulty: "beginner"  # Options: "beginner", "intermediate", "advanced"
+    advancement_rate: "moderate"  # Options: "slow", "moderate", "fast"
+    difficulty_distribution:  # Target distribution percentages
+      beginner: 40
+      intermediate: 40
+      advanced: 20
+  
+  technology_preferences:
+    languages: ["python", "javascript", "typescript"]  # Preferred programming languages
+    ml_frameworks: ["pytorch", "scikit-learn", "tensorflow"]
+    web_frameworks: ["fastapi", "express", "react", "nextjs"]
+    databases: ["postgresql", "mongodb", "redis", "sqlite"]
+
+scheduling:
+  enabled: true
+  time: "09:00"  # 24-hour format (IST)
+  timezone: "Asia/Kolkata"
+  time_randomization_minutes: 120  # ±2 hours for authenticity
+  skip_weekends: false  # Set to true to only run on weekdays
+  retry_on_failure: true
+  max_retries: 3
+  
+automation:
+  mode: "auto"  # Options: "auto", "review", "manual"
+  commit_strategy: "detailed"  # Options: "single", "smart" (1-3 commits), "detailed" (3-5 commits)
+  push_immediately: true
+  create_branch: false  # Use main branch by default
+  auto_merge: false
+  delete_branch_after_merge: true
+  
+quality:
+  min_lines_of_code: 100
+  require_readme: true
+  require_tests: true
+  require_documentation: true
+  min_documentation_coverage: 70  # Percentage
+  code_complexity_threshold: 15  # Maximum cyclomatic complexity
+  enforce_code_style: true
+  run_linters: true
+
+notifications:
+  enabled: false
+  email: "${NOTIFICATION_EMAIL}"
+  send_daily_summary: true
+  send_weekly_report: true
+  send_on_error: true
+  notification_time: "20:00"  # When to send daily summary
+
+database:
+  path: "data/activity_tracker.db"
+  backup_enabled: true
+  backup_frequency: "weekly"  # Options: "daily", "weekly", "monthly"
+  backup_path: "data/backups/"
+
+projects:
+  output_directory: "generated_projects"  # Local generation directory
+  keep_local_copies: true
+  max_simultaneous_projects: 1  # Number of projects to work on simultaneously
+  project_lifetime_days: 7  # How long before a project is considered "complete"
+  
+diversity:
+  prevent_same_tech_consecutive: true
+  prevent_same_category_consecutive: true
+  rotation_cycle_days: 7  # Ensure all categories covered in X days
+  
+logging:
+  level: "INFO"  # Options: "DEBUG", "INFO", "WARNING", "ERROR"
+  file_path: "data/logs/activity_generator.log"
+  console_output: true
+  rich_formatting: true  # Use rich library for colored output
