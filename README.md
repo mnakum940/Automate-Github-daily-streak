@@ -1,30 +1,33 @@
 # Intelligent GitHub Activity Generator System
 
+![Version](https://img.shields.io/badge/version-1.0.0-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Status](https://img.shields.io/badge/status-active-success)
+
 An automated, AI-powered system that generates meaningful GitHub projects and contributions to accelerate career growth for Computer Science students.
 
 ## 🎯 Purpose
 
 Instead of random commits or empty activity, this system creates **genuine, portfolio-ready projects** that:
-- Build real technical skills (AI/ML, Full-stack, System Design, Security/Blockchain)
-- Maintain consistent GitHub activity
-- Progress from beginner to advanced difficulty
-- Include proper documentation, tests, and best practices
+- Build real technical skills (AI/ML, Full-stack, System Design, Security/Blockchain).
+- Maintain consistent GitHub activity.
+- Progress from beginner to advanced difficulty.
+- Include proper documentation, tests, and best practices.
 
 ## ✨ Features
 
-- **AI-Powered Project Generation**: Uses GPT-4 or local LLMs to create unique project ideas
-- **Intelligent Skill Tracking**: Monitors your growth across multiple technical domains
-- **Smart Commit Strategy**: Creates authentic-looking commits (not spam)
-- **Quality Enforcement**: Ensures every project meets minimum standards
-- **Automated Scheduling**: Runs daily with time randomization for authenticity
-- **Progress Analytics**: Tracks skill proficiency and project difficulty progression
+- **🧠 AI-Powered Planning**: Uses LLMs (Ollama/OpenAI) to generate unique, novel project ideas based on your skill gaps.
+- **🏗️ Smart Architecture**: Automatically designs professional file structures (2-Factor Analysis) and writes production-ready code.
+- **🐳 Docker Integration**: Every generated project comes with a `Dockerfile` and `docker-compose.yml`.
+- **🏆 Gamification**: Earn XP, streaks, and unlock achievements (e.g., "Code Warrior", "Hello World").
+- **📄 Resume Generator**: Auto-generates a markdown resume based on your completed projects.
+- **📊 Interactive Dashboard**: Visualizes your progress, skill proficiency, and activity stats in the terminal.
+- **🤖 Git Automation**: Handles `git init`, semantic commits, and remote pushes automatically.
 
 ## 📋 Prerequisites
 
-- Python 3.11 or higher
-- Git installed and configured
-- GitHub account with personal access token
-- OpenAI API key (or Ollama for local LLM)
+- **Python 3.11+**
+- **Git** installed and configured
+- **GitHub Account** (with Personal Access Token)
+- **Ollama** (for local LLM) or **OpenAI API Key**
 
 ## 🚀 Quick Start
 
@@ -32,16 +35,13 @@ Instead of random commits or empty activity, this system creates **genuine, port
 
 ```bash
 # Clone the repository
+git clone https://github.com/yourusername/github-activity-system.git
 cd github-activity-system
 
 # Create virtual environment
 python -m venv venv
-
-# Activate virtual environment
-# Windows:
-venv\Scripts\activate
-# Linux/Mac:
-source venv/bin/activate
+# Windows: venv\Scripts\activate
+# Linux/Mac: source venv/bin/activate
 
 # Install dependencies
 pip install -r requirements.txt
@@ -50,204 +50,80 @@ pip install -r requirements.txt
 ### 2. Configuration
 
 ```bash
-# Copy environment template
-copy .env.example .env  # Windows
-# cp .env.example .env  # Linux/Mac
+# Create .env file
+copy .env.example .env
 
-# Edit .env and add your credentials:
-# - GITHUB_TOKEN (from GitHub Settings → Developer Settings → Personal Access Tokens)
-# - GITHUB_USERNAME
-# - OPENAI_API_KEY (or configure Ollama in config.yaml)
+# Edit .env with your credentials:
+# GITHUB_TOKEN=ghp_...
+# GITHUB_USERNAME=...
 ```
-
-Edit `config.yaml` to customize:
-- Skill focus areas (AI/ML, full-stack, system design, security)
-- Daily execution time
-- Automation mode (auto/review/manual)
-- Quality thresholds
 
 ### 3. Initialize System
 
 ```bash
-# Initialize database and directories
 python main.py init
-
-# Verify configuration
 python main.py configure
 ```
 
-### 4. Test Run
+### 4. Generate Your First Project
 
 ```bash
-# Generate a project locally (without pushing to GitHub)
+# Run locally (dry-run) to see what content is generated
 python main.py run --dry-run
-
-# Check the generated project in the 'generated_projects/' directory
 ```
-
-### 5. Start Automation
-
-```bash
-# For daily automated execution
-python main.py schedule
-
-# Or run manually anytime
-python main.py run
-```
-
-# Or run manually anytime
-python main.py run
-```
-
-### 6. Windows Task Scheduler ("Cron Job")
-
-To run the generator automatically in the background (like a cron job):
-
-1.  Open **Task Scheduler** on Windows.
-2.  Click **Create Basic Task**.
-3.  Name it "GitHub Activity Generator".
-4.  Trigger: **Daily** at your preferred time (e.g., 09:00 AM).
-5.  Action: **Start a program**.
-6.  Program/script: Browse and select the `run_daily.bat` file in this folder.
-7.  Finish.
 
 ## 📊 Commands
 
 | Command | Description |
-|---------|-------------|
-| `python main.py init` | Initialize database and directories |
-| `python main.py configure` | Check and validate configuration |
-| `python main.py run` | Execute workflow immediately |
-| `python main.py run --dry-run` | Generate locally without pushing |
-| `python main.py schedule` | Start daily scheduler |
-| `python main.py status` | View statistics and recent activity |
-| `python main.py dashboard` | Interactive progress dashboard |
-| `python main.py reset` | Reset database (deletes all data) |
+| :--- | :--- |
+| `python main.py init` | Initialize database and create necessary directories. |
+| `python main.py configure` | Validate configuration and environment variables. |
+| `python main.py run` | **Generate a new project** (Planning -> Code -> Git Commit -> Push). |
+| `python main.py run --dry-run` | Generate project locally without pushing to GitHub. |
+| `python main.py resume` | **Generate a resume** based on your project history. |
+| `python main.py status` | View current statistics, level, and recent activity. |
+| `python main.py dashboard` | Open the interactive terminal dashboard. |
+| `python main.py schedule` | Start the daily automation scheduler. |
+| `python main.py reset` | **Reset the system** (clears database and projects). |
 
 ## 🏗️ System Architecture
 
-```
-┌─────────────────┐
-│ Daily Scheduler │
-└────────┬────────┘
-         │
-         v
-┌─────────────────────┐
-│ Project Planner     │ ← Analyzes skill gaps
-│ (AI-powered)        │
-└────────┬────────────┘
-         │
-         v
-┌─────────────────────┐
-│ Code Generator      │ ← Creates project structure
-│ (LLM-based)         │   and starter code
-└────────┬────────────┘
-         │
-         v
-┌─────────────────────┐
-│ Documentation       │ ← Generates README,
-│ Generator           │   commit messages
-└────────┬────────────┘
-         │
-         v
-┌─────────────────────┐
-│ Git Automation      │ ← Creates commits,
-│ Engine              │   pushes to GitHub
-└────────┬────────────┘
-         │
-         v
-┌─────────────────────┐
-│ Skill Tracker       │ ← Updates proficiency
-│ & Analytics         │   scores
-└─────────────────────┘
-```
+1.  **Project Planner**: Analyzes your skill profile and suggests a new project.
+2.  **Code Generator**: Uses AI to design the file structure and write code.
+3.  **Documentation Engine**: Generates professional README and commit messages.
+4.  **Git Manager**: Initializes repo, commits changes, and pushes to remote.
+5.  **Tracker**: Updates your XP, skills, and achievements database.
 
 ## 📁 Project Structure
 
 ```
 github-activity-system/
-├── main.py                 # CLI entry point
-├── config.yaml             # Configuration file
-├── requirements.txt        # Python dependencies
-├── .env                    # Environment variables (create from .env.example)
-│
-├── src/                    # Source code
-│   ├── config_manager.py   # Configuration management
-│   ├── database.py         # Database models
-│   ├── planning/           # Project planning modules
-│   ├── generation/         # Code generation
-│   ├── automation/         # Git & GitHub automation
-│   ├── tracking/           # Analytics & tracking
-│   └── orchestration/      # Workflow orchestration
-│
-├── templates/              # Project templates
-│   ├── ai_ml/
-│   ├── full_stack/
-│   ├── system_design/
-│   └── security_blockchain/
-│
-├── data/                   # Generated at runtime
-│   ├── activity_tracker.db
-│   └── logs/
-│
-└── generated_projects/     # Local project generation
+├── src/
+│   ├── planning/       # AI Project Planning
+│   ├── generation/     # Code & Doc Generation
+│   ├── automation/     # Git & Scheduling
+│   ├── tracking/       # Analytics & DB
+│   └── reporting/      # Resume Generator
+├── data/               # SQLite Database
+├── docs/               # System Documentation
+└── generated_projects/ # Where your projects live
 ```
 
-## 🎓 Skill Categories
+## 🎓 Skill Tracks
 
-### AI/ML (35%)
-- Machine Learning
-- Deep Learning
-- Natural Language Processing
-- Computer Vision
-- MLOps
-
-### Full-Stack Development (30%)
-- Backend (FastAPI, Django, Express)
-- Frontend (React, Next.js)
-- REST APIs
-- Database Design
-
-### System Design (20%)
-- Distributed Systems
-- Caching Strategies
-- Message Queues
-- Microservices
-- Load Balancing
-
-### Security/Blockchain (15%)
-- Authentication & Authorization
-- Encryption
-- Web Security
-- Smart Contracts
-- Security Auditing
-
-## 🔒 Authenticity Features
-
-To avoid appearing as bot activity:
-- **Time Randomization**: Commits at slightly different times (±2 hours)
-- **Quality Thresholds**: Minimum 100 LOC, documentation, tests required
-- **Varied Commit Messages**: Semantic commit messages with context
-- **Smart Commit Strategy**: 1-3 meaningful commits per project
-- **Review Mode**: Optional human approval before push
-- **Technology Diversity**: Prevents same tech/category on consecutive days
-
-## 📈 Progress Tracking
-
-The system tracks:
-- ✅ **Skill Proficiency**: 0-100 score for each skill
-- ✅ **Technology Coverage**: Which frameworks/languages used
-- ✅ **Difficulty Progression**: Ensures gradual advancement
-- ✅ **Contribution Streak**: Daily activity monitoring
-- ✅ **Portfolio Quality Score**: Overall portfolio readiness
+The system rotates through these domains to build a T-shaped profile:
+- **AI/ML**: PyTorch, TensorFlow, OpenCV, NLP
+- **Full-Stack**: React, FastAPI, Node.js, Django
+- **System Design**: Microservices, Docker, Redis
+- **Security**: Cryptography, Auth, Blockchain
 
 ## 🤝 Contributing
 
-This is a personal career development tool, but improvements are welcome!
+This is a personal tool for career growth, but improvements are welcome!
 
 ## 📄 License
 
-MIT License - feel free to use and modify for your own career growth.
+MIT License.
 
 ## 👤 Author
 
@@ -255,14 +131,5 @@ MIT License - feel free to use and modify for your own career growth.
 - B.Tech in Computer Science (Jain University, 2021-2025)
 - M.Tech in AI & Data Science (DBS Global University, 2025-2027)
 
-## 🙏 Acknowledgments
-
-Built to demonstrate:
-- AI integration capabilities
-- Software engineering best practices
-- Commitment to continuous learning
-- Portfolio-building strategies
-
 ---
-
-**Note**: This system is designed for genuine skill development. Use responsibly and ensure all generated code is understood and can be explained in interviews.
+*Built with Python, Typer, Rich, and LLMs.*
